@@ -14,6 +14,9 @@
 		D2E495DD1FE3D6ED00EE51E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2E495DB1FE3D6ED00EE51E8 /* LaunchScreen.storyboard */; };
 		D2E495E81FE3D6ED00EE51E8 /* lab2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E495E71FE3D6ED00EE51E8 /* lab2Tests.swift */; };
 		D2E495F31FE3D6ED00EE51E8 /* lab2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E495F21FE3D6ED00EE51E8 /* lab2UITests.swift */; };
+		D2E496011FE3DC8200EE51E8 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E496001FE3DC8200EE51E8 /* MessagesViewController.swift */; };
+		D2E496031FE3DDD500EE51E8 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E496021FE3DDD500EE51E8 /* Message.swift */; };
+		D2E496051FE3DE1000EE51E8 /* MessagesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E496041FE3DE1000EE51E8 /* MessagesService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 		D2E495EE1FE3D6ED00EE51E8 /* lab2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = lab2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2E495F21FE3D6ED00EE51E8 /* lab2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lab2UITests.swift; sourceTree = "<group>"; };
 		D2E495F41FE3D6ED00EE51E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2E496001FE3DC8200EE51E8 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		D2E496021FE3DDD500EE51E8 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		D2E496041FE3DE1000EE51E8 /* MessagesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,9 @@
 				D2E495D91FE3D6ED00EE51E8 /* Assets.xcassets */,
 				D2E495DB1FE3D6ED00EE51E8 /* LaunchScreen.storyboard */,
 				D2E495DE1FE3D6ED00EE51E8 /* Info.plist */,
+				D2E496001FE3DC8200EE51E8 /* MessagesViewController.swift */,
+				D2E496021FE3DDD500EE51E8 /* Message.swift */,
+				D2E496041FE3DE1000EE51E8 /* MessagesService.swift */,
 			);
 			path = lab2;
 			sourceTree = "<group>";
@@ -259,7 +268,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2E496011FE3DC8200EE51E8 /* MessagesViewController.swift in Sources */,
+				D2E496031FE3DDD500EE51E8 /* Message.swift in Sources */,
 				D2E495D51FE3D6ED00EE51E8 /* ViewController.swift in Sources */,
+				D2E496051FE3DE1000EE51E8 /* MessagesService.swift in Sources */,
 				D2E495D31FE3D6ED00EE51E8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
