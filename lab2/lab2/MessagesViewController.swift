@@ -14,6 +14,26 @@ class MessagesViewController: UITableViewController {
     var messages : [Message]?
     var messagesService: MessagesService?
     
+    @IBAction func onComposeMessageClick(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: "New message", message: "Please state your name and message", preferredStyle: .alert)
+        alertController.addTextField(configurationHandler: { textField in
+            textField.placeholder = "Your name"
+        } )
+        alertController.addTextField(configurationHandler: { textField in
+            textField.placeholder = "Your message"
+        } )
+        let sendAction = UIAlertAction(title: "Send", style: .default, handler: { action in
+            let name = alertController.textFields?[0].text
+            let message = alertController.textFields?[1].text
+            
+            print("SAVE \(name) \(message)")
+        })
+        alertController.addAction(sendAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in })
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         messagesService = MessagesService()
@@ -37,7 +57,6 @@ class MessagesViewController: UITableViewController {
     }
     
     func reloadData(){
-        print("reloading")
         messages = sortByTimestamp(messages: (messagesService?.getMessages())!)
         self.tableView.reloadData()
     }

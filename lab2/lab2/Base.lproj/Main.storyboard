@@ -50,7 +50,11 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Messages" id="B5I-AM-lAS">
-                        <barButtonItem key="rightBarButtonItem" title="Compose" id="egX-Ot-02H"/>
+                        <barButtonItem key="rightBarButtonItem" title="Compose" id="egX-Ot-02H">
+                            <connections>
+                                <action selector="onComposeMessageClick:" destination="ApR-fE-XFy" id="jY6-af-L3A"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
