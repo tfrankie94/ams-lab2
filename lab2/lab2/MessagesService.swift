@@ -11,19 +11,24 @@ import Alamofire
 
 class MessagesService {
 
+    var messages = [
+        Message(timestamp: Date(), author: "Wojtek", message: "Wiadomosc od Wojtka. Cos ciekawego mam do powiedzenia."),
+        Message(timestamp: Date(), author: "Wojtek", message: "Wciaz nie ruszylem lab1."),
+        Message(timestamp: Date(), author: "Tomek", message: "Wiem wojcio."),
+        Message(timestamp: Date(), author: "Tomek", message: "A jeszcze algosy czekaja.")
+    ]
+    
     init(){
         
     }
     
     func getMessages() -> [Message] {
-        getRequest();
-        let messages = [
-            Message(timestamp: Date(), author: "Wojtek", message: "Wiadomosc od Wojtka. Cos ciekawego mam do powiedzenia."),
-            Message(timestamp: Date(), author: "Wojtek", message: "Wciaz nie ruszylem lab1."),
-            Message(timestamp: Date(), author: "Tomek", message: "Wiem wojcio."),
-            Message(timestamp: Date(), author: "Tomek", message: "A jeszcze algosy czekaja.")
-        ]
+//        getRequest();
         return messages
+    }
+    
+    func sendMessage(author: String, message: String){
+        messages.append(Message(timestamp: Date(), author: author, message: message))
     }
     
     func getRequest(){

@@ -8,7 +8,8 @@ target 'lab2' do
   # Pods for lab2
   pod 'Alamofire', '~> 4.5'
   pod 'DGElasticPullToRefresh', '~> 1.1'
-
+  pod 'Toast-Swift', '~> 3.0.1'
+ 
   target 'lab2Tests' do
     inherit! :search_paths
     # Pods for testing
