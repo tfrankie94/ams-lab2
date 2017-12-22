@@ -10,8 +10,16 @@ import Foundation
 
 struct Message {
     
+    var id: Int?
     var timestamp: Date
-    var author : String
+    var name : String
     var message : String
+    
+    init(id: Int? = nil, timestamp: Date = Date(), name: String, message: String) {
+        self.id = id
+        self.timestamp = timestamp
+        self.name = name
+        self.message = message
+    }
     
 }

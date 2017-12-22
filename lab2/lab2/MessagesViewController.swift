@@ -35,9 +35,7 @@ class MessagesViewController: UITableViewController {
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
         loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
         tableView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
-            // Add your logic here
             self?.reloadData()
-            // Do not forget to call dg_stopLoading() at the end
             self?.tableView.dg_stopLoading()
             }, loadingView: loadingView)
         tableView.dg_setPullToRefreshFillColor(UIColor(red: 57/255.0, green: 67/255.0, blue: 89/255.0, alpha: 1.0))
@@ -74,8 +72,11 @@ class MessagesViewController: UITableViewController {
     }
     
     func sendMessage(name: String, message: String){
-        messagesService!.sendMessage(author: name, message: message)
-        reloadData()
+        let message = Message(name: name, message: message)
+        messagesService!.sendMessage(message: message){responseMessage in
+            self.messages?.insert(responseMessage, at: 0)
+            self.refreshUI()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool){
@@ -84,8 +85,16 @@ class MessagesViewController: UITableViewController {
     }
     
     func reloadData(){
-        messages = sortByTimestamp(messages: (messagesService?.getMessages())!)
-        self.tableView.reloadData()
+        messagesService?.getMessages{ messages in
+            self.messages = self.sortByTimestamp(messages: messages)
+            self.refreshUI()
+        }
+    }
+    
+    func refreshUI() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     func sortByTimestamp(messages: [Message]) -> [Message] {
@@ -93,106 +102,23 @@ class MessagesViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messages!.count
+        if messages != nil {
+            return messages!.count
+        } else {
+            return 0
+        }
     }
     
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM.yyyy hh:mm:ss"
-        
         let message = messages![indexPath.row]
         let elapsedTime = Date().timeIntervalSince(message.timestamp)
-
+        
         cell.textLabel?.text = "\(Int(elapsedTime)/60) minutes ago"
-        cell.detailTextLabel?.text = "\(message.author) says: \(message.message)"
+        cell.detailTextLabel?.text = "\(message.name) says: \(message.message)"
         return cell
     }
-    
-    /*
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
-     */
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
