@@ -43,31 +43,31 @@ class MessagesViewController: UITableViewController {
     }
     
     func initAlertController(){
-        alertController = UIAlertController(title: "New message", message: "", preferredStyle: .alert)
+        alertController = UIAlertController(title: "newMessageTitle".localized, message: "", preferredStyle: .alert)
         alertController?.addTextField(configurationHandler: { textField in
             self.alertControllerNameTextField = textField
-            textField.placeholder = "Your name"
+            textField.placeholder = "namePlaceholder".localized
         } )
         alertController?.addTextField(configurationHandler: { textField in
             self.alertControllerMessageTextField = textField
-            textField.placeholder = "Your message"
+            textField.placeholder = "messagePlaceholder".localized
         } )
-        let sendAction = UIAlertAction(title: "Send", style: .default, handler: { action in
+        let sendAction = UIAlertAction(title: "sendButtonText".localized, style: .default, handler: { action in
             let name = self.alertController?.textFields?[0].text
             let message = self.alertController?.textFields?[1].text
             
             if(name!.count < 3 || message!.count < 3){
-                self.view.makeToast("Name and message should be at least 3 letters long.", duration: 3.0, position: .top)
+                self.view.makeToast("lengthVerificationText".localized, duration: 3.0, position: .top)
                 self.present(self.alertController!, animated: true, completion: nil)
             } else {
                 self.sendMessage(name: name!, message: message!)
                 self.alertControllerNameTextField?.text = ""
                 self.alertControllerMessageTextField?.text = ""
-                self.view.makeToast("Message sent.", duration: 3.0, position: .top)
+                self.view.makeToast("messageSentText".localized, duration: 3.0, position: .top)
             }
         })
         alertController?.addAction(sendAction)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in })
+        let cancelAction = UIAlertAction(title: "cancelButtonText".localized, style: .cancel, handler: { _ in })
         alertController?.addAction(cancelAction)
     }
     
@@ -116,9 +116,15 @@ class MessagesViewController: UITableViewController {
         let message = messages![indexPath.row]
         let elapsedTime = Date().timeIntervalSince(message.timestamp)
         
-        cell.textLabel?.text = "\(Int(elapsedTime)/60) minutes ago"
-        cell.detailTextLabel?.text = "\(message.name) says: \(message.message)"
+        cell.textLabel?.text = "\(Int(elapsedTime)/60) \("minutesAgoTitleText".localized)"
+        cell.detailTextLabel?.text = "\(message.name) \("saysSubtitleText".localized): \(message.message)"
         return cell
     }
 
+}
+
+extension String {
+    var localized: String {
+        return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
+    }
 }

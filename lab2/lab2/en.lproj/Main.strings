@@ -1,0 +1,15 @@
+
+/* Class = "UINavigationItem"; title = "Messages"; ObjectID = "B5I-AM-lAS"; */
+"B5I-AM-lAS.title" = "Messages";
+
+/* Class = "UITabBarItem"; title = "Messages"; ObjectID = "FWX-q0-OJC"; */
+"FWX-q0-OJC.title" = "Messages";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "SKC-7g-LTS"; */
+"SKC-7g-LTS.text" = "Title";
+
+/* Class = "UIBarButtonItem"; title = "Compose"; ObjectID = "egX-Ot-02H"; */
+"egX-Ot-02H.title" = "Compose";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "nHo-Fe-sJf"; */
+"nHo-Fe-sJf.text" = "Subtitle";
